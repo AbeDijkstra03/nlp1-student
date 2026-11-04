@@ -1,0 +1,171 @@
+
+==================== Fold 1/5 ====================
+  Encoding fold 1 features: indicator...
+  Encoding fold 1 features: bow...
+  Encoding fold 1 features: tfidf...
+    [loglin_indicator  ] Fold 1 -> Macro-F1: 0.6228 | Acc: 0.6417
+    [loglin_bow        ] Fold 1 -> Macro-F1: 0.6172 | Acc: 0.6362
+    [loglin_tfidf      ] Fold 1 -> Macro-F1: 0.5943 | Acc: 0.6105
+    [shallow_mlp_indicator] Fold 1 -> Macro-F1: 0.6147 | Acc: 0.6396
+    [shallow_mlp_bow   ] Fold 1 -> Macro-F1: 0.6139 | Acc: 0.6361
+    [shallow_mlp_tfidf ] Fold 1 -> Macro-F1: 0.6205 | Acc: 0.6407
+    [deep_mlp_indicator] Fold 1 -> Macro-F1: 0.6092 | Acc: 0.6439
+    [deep_mlp_bow      ] Fold 1 -> Macro-F1: 0.6066 | Acc: 0.6375
+/home/abedijkstra/Documents/AI/NLP1/nlp1-student/Assignment1/src/train.py:77: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+    [deep_mlp_tfidf    ] Fold 1 -> Macro-F1: 0.5987 | Acc: 0.6312
+
+==================== Fold 2/5 ====================
+  Encoding fold 2 features: indicator...
+  Encoding fold 2 features: bow...
+  Encoding fold 2 features: tfidf...
+    [loglin_indicator  ] Fold 2 -> Macro-F1: 0.6228 | Acc: 0.6402
+    [loglin_bow        ] Fold 2 -> Macro-F1: 0.6209 | Acc: 0.6385
+    [loglin_tfidf      ] Fold 2 -> Macro-F1: 0.5977 | Acc: 0.6111
+    [shallow_mlp_indicator] Fold 2 -> Macro-F1: 0.6188 | Acc: 0.6417
+    [shallow_mlp_bow   ] Fold 2 -> Macro-F1: 0.6249 | Acc: 0.6463
+    [shallow_mlp_tfidf ] Fold 2 -> Macro-F1: 0.6151 | Acc: 0.6342
+    [deep_mlp_indicator] Fold 2 -> Macro-F1: 0.6136 | Acc: 0.6445
+    [deep_mlp_bow      ] Fold 2 -> Macro-F1: 0.6149 | Acc: 0.6457
+/home/abedijkstra/Documents/AI/NLP1/nlp1-student/Assignment1/src/train.py:77: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+    [deep_mlp_tfidf    ] Fold 2 -> Macro-F1: 0.6121 | Acc: 0.6405
+
+==================== Fold 3/5 ====================
+  Encoding fold 3 features: indicator...
+  Encoding fold 3 features: bow...
+  Encoding fold 3 features: tfidf...
+    [loglin_indicator  ] Fold 3 -> Macro-F1: 0.6151 | Acc: 0.6309
+    [loglin_bow        ] Fold 3 -> Macro-F1: 0.6121 | Acc: 0.6282
+    [loglin_tfidf      ] Fold 3 -> Macro-F1: 0.5917 | Acc: 0.6045
+    [shallow_mlp_indicator] Fold 3 -> Macro-F1: 0.6035 | Acc: 0.6222
+    [shallow_mlp_bow   ] Fold 3 -> Macro-F1: 0.6105 | Acc: 0.6276
+    [shallow_mlp_tfidf ] Fold 3 -> Macro-F1: 0.6091 | Acc: 0.6241
+    [deep_mlp_indicator] Fold 3 -> Macro-F1: 0.6009 | Acc: 0.6204
+    [deep_mlp_bow      ] Fold 3 -> Macro-F1: 0.5946 | Acc: 0.6240
+/home/abedijkstra/Documents/AI/NLP1/nlp1-student/Assignment1/src/train.py:77: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+    [deep_mlp_tfidf    ] Fold 3 -> Macro-F1: 0.5899 | Acc: 0.6073
+
+==================== Fold 4/5 ====================
+  Encoding fold 4 features: indicator...
+  Encoding fold 4 features: bow...
+  Encoding fold 4 features: tfidf...
+    [loglin_indicator  ] Fold 4 -> Macro-F1: 0.6203 | Acc: 0.6378
+    [loglin_bow        ] Fold 4 -> Macro-F1: 0.6214 | Acc: 0.6401
+    [loglin_tfidf      ] Fold 4 -> Macro-F1: 0.5986 | Acc: 0.6136
+    [shallow_mlp_indicator] Fold 4 -> Macro-F1: 0.6151 | Acc: 0.6352
+    [shallow_mlp_bow   ] Fold 4 -> Macro-F1: 0.6189 | Acc: 0.6406
+    [shallow_mlp_tfidf ] Fold 4 -> Macro-F1: 0.6151 | Acc: 0.6354
+    [deep_mlp_indicator] Fold 4 -> Macro-F1: 0.6125 | Acc: 0.6449
+    [deep_mlp_bow      ] Fold 4 -> Macro-F1: 0.6132 | Acc: 0.6434
+/home/abedijkstra/Documents/AI/NLP1/nlp1-student/Assignment1/src/train.py:77: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+    [deep_mlp_tfidf    ] Fold 4 -> Macro-F1: 0.6058 | Acc: 0.6370
+
+==================== Fold 5/5 ====================
+  Encoding fold 5 features: indicator...
+  Encoding fold 5 features: bow...
+  Encoding fold 5 features: tfidf...
+    [loglin_indicator  ] Fold 5 -> Macro-F1: 0.6114 | Acc: 0.6294
+    [loglin_bow        ] Fold 5 -> Macro-F1: 0.6086 | Acc: 0.6260
+    [loglin_tfidf      ] Fold 5 -> Macro-F1: 0.5893 | Acc: 0.6034
+    [shallow_mlp_indicator] Fold 5 -> Macro-F1: 0.6057 | Acc: 0.6218
+    [shallow_mlp_bow   ] Fold 5 -> Macro-F1: 0.6081 | Acc: 0.6284
+    [shallow_mlp_tfidf ] Fold 5 -> Macro-F1: 0.6064 | Acc: 0.6252
+    [deep_mlp_indicator] Fold 5 -> Macro-F1: 0.6020 | Acc: 0.6314
+    [deep_mlp_bow      ] Fold 5 -> Macro-F1: 0.6014 | Acc: 0.6308
+/home/abedijkstra/Documents/AI/NLP1/nlp1-student/Assignment1/src/train.py:77: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+    [deep_mlp_tfidf    ] Fold 5 -> Macro-F1: 0.5964 | Acc: 0.6168
+
+CV Completed in 171.0s.
+
+======================================================================
+CROSS-VALIDATION RESULTS SUMMARY (5-FOLD STRATIFIED)
+======================================================================
+System (Arch + Rep)      | Macro-F1 (Mean +/- Std) | Accuracy (Mean +/- Std)
+----------------------------------------------------------------------
+loglin_indicator         | 0.6185 +/- 0.0045        | 0.6360 +/- 0.0050
+loglin_bow               | 0.6160 +/- 0.0050        | 0.6338 +/- 0.0057
+loglin_tfidf             | 0.5943 +/- 0.0035        | 0.6086 +/- 0.0040
+shallow_mlp_indicator    | 0.6115 +/- 0.0059        | 0.6321 +/- 0.0085
+shallow_mlp_bow          | 0.6153 +/- 0.0060        | 0.6358 +/- 0.0071
+shallow_mlp_tfidf        | 0.6132 +/- 0.0050        | 0.6319 +/- 0.0063
+deep_mlp_indicator       | 0.6076 +/- 0.0053        | 0.6370 +/- 0.0097
+deep_mlp_bow             | 0.6061 +/- 0.0075        | 0.6363 +/- 0.0080
+deep_mlp_tfidf           | 0.6006 +/- 0.0077        | 0.6265 +/- 0.0126
+
+>>> STEP 5: Bayesian Estimation with ROPE (baycomp)...
+
+================================================================================
+BAYESIAN ESTIMATION WITH ROPE (rope=0.010)
+================================================================================
+Saved Bayesian plot to Assignment1/slides/figures/bayesian_rope_deep_vs_shallow.pdf
+
+Comparison: Deep MLP vs. Shallow MLP
+  Mean Difference: -0.0127 (Std: 0.0052, Effect Size: -2.44)
+  95% HDI: [-0.0270, 0.0017]
+  P(Shallow MLP > Deep MLP): 68.24% | P(ROPE): 31.16% | P(Deep MLP > Shallow MLP): 0.60%
+Saved Bayesian plot to Assignment1/slides/figures/bayesian_rope_deep_vs_loglin.pdf
+
+Comparison: Deep MLP vs. Log-Linear
+  Mean Difference: +0.0063 (Std: 0.0039, Effect Size: 1.60)
+  95% HDI: [-0.0046, 0.0171]
+  P(Log-Linear > Deep MLP): 0.71% | P(ROPE): 79.64% | P(Deep MLP > Log-Linear): 19.64%
+Saved Bayesian plot to Assignment1/slides/figures/bayesian_rope_shallow_vs_loglin.pdf
+
+Comparison: Shallow MLP vs. Log-Linear
+  Mean Difference: +0.0189 (Std: 0.0027, Effect Size: 6.91)
+  95% HDI: [0.0113, 0.0265]
+  P(Log-Linear > Shallow MLP): 0.02% | P(ROPE): 1.54% | P(Shallow MLP > Log-Linear): 98.44%
+Saved Bayesian plot to Assignment1/slides/figures/bayesian_rope_tfidf_vs_bow.pdf
+
+Comparison: TF-IDF vs. Bag-of-Words
+  Mean Difference: -0.0056 (Std: 0.0014, Effect Size: -3.95)
+  95% HDI: [-0.0095, -0.0017]
+  P(Bag-of-Words > TF-IDF): 1.75% | P(ROPE): 98.23% | P(TF-IDF > Bag-of-Words): 0.02%
+Saved Bayesian plot to Assignment1/slides/figures/bayesian_rope_tfidf_vs_indicator.pdf
+
+Comparison: TF-IDF vs. Indicator
+  Mean Difference: -0.0071 (Std: 0.0026, Effect Size: -2.70)
+  95% HDI: [-0.0143, 0.0002]
+  P(Indicator > TF-IDF): 16.26% | P(ROPE): 83.60% | P(TF-IDF > Indicator): 0.14%
+
+>>> STEP 6: Final Test Evaluation & Error Analysis...
+Running Final Model Evaluation on cuda...
+Fitting TF-IDF on full training set...
+
+Training full loglin on Train set...
+[loglin] Test Acc: 0.5730 | Test Macro-F1: 0.5701
+
+Training full shallow_mlp on Train set...
+[shallow_mlp] Test Acc: 0.5611 | Test Macro-F1: 0.5603
+
+Training full deep_mlp on Train set...
+/home/abedijkstra/Documents/AI/NLP1/nlp1-student/Assignment1/src/train.py:77: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[deep_mlp] Test Acc: 0.5446 | Test Macro-F1: 0.5347
+Saved confusion_matrices.pdf / .png
+
+======================================================================
+QUALITATIVE ERROR ANALYSIS (HARD SAMPLES ON TEST SET)
+======================================================================
+
+Samples where Deep MLP corrected Log-Linear error: 1432
+  [True: Neutral ] LogLin: Negative | Deep: Neutral  | Text: @user @user what do these '1/2 naked pics' have to do with anything? They're not even like...
+  [True: Neutral ] LogLin: Negative | Deep: Neutral  | Text: @user @user That's coming, but I think the victims are going to be Medicaid recipients....
+  [True: Neutral ] LogLin: Negative | Deep: Neutral  | Text: @user ohhh ok i see 🤔 what if u have medical marijuana clearance? Does that make a differe...
+  [True: Neutral ] LogLin: Negative | Deep: Neutral  | Text: ISIS and The CIA What You Need To Know! #ISIS #falseflag #saudi #CIA #mossad #israel...
+
+Samples where both models failed (Ambiguous / Sarcastic / Hard): 3813
+  [True: Negative] Pred: Neutral  | Text: @user Wow,first Hugo Chavez and now Fidel Castro. Danny Glover, Michael Moore, Oliver Ston...
+  [True: Neutral ] Pred: Negative | Text: Savchenko now Saakashvili took drug test live on Ukraine TV. To prove they are not drug-fu...
+  [True: Positive] Pred: Neutral  | Text: Twitter's #ThankYouObama Shows Heartfelt Gratitude To POTUS...
+  [True: Negative] Pred: Neutral  | Text: When Ryan privatizes SS, Medicare, Medicaid, & does away with ACA, what will Trump's base ...
+
+================================================================================
+PIPELINE COMPLETED SUCCESSFULLY IN 204.9s!
+All figures saved in: Assignment1/slides/figures/
+All numeric results saved in: Assignment1/results/
+================================================================================

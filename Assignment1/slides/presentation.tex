@@ -1,0 +1,263 @@
+\documentclass[aspectratio=169, 10pt]{beamer}
+
+% Typography and encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% Define modern academic theme colors
+\definecolor{primary}{RGB}{30, 41, 59}     % Slate dark
+\definecolor{accent}{RGB}{15, 118, 110}    % Teal
+\definecolor{highlight}{RGB}{185, 28, 28}  % Crimson
+\definecolor{subtle}{RGB}{100, 116, 139}   % Muted gray
+\definecolor{cardbg}{RGB}{248, 250, 252}   % Off-white
+
+\setbeamercolor{palette primary}{bg=primary, fg=white}
+\setbeamercolor{structure}{fg=accent}
+\setbeamercolor{title}{fg=white, bg=primary}
+\setbeamercolor{frametitle}{fg=primary, bg=cardbg}
+\setbeamercolor{block title}{fg=white, bg=accent}
+\setbeamercolor{block body}{fg=primary, bg=cardbg}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=\paperwidth,ht=2.2ex,dp=0.8ex,leftskip=0.8cm,rightskip=0.8cm]{cardbg}%
+            \tiny\textcolor{subtle}{NLP1 (MSc AI) \textbar{} Project 1: TweetEval Sentiment Classification \hfill Slide \insertframenumber{} / \inserttotalframenumber}
+        \end{beamercolorbox}%
+    }%
+    \vskip0pt%
+}
+
+\setbeamertemplate{frametitle}{
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.6ex,dp=0.8ex,leftskip=0.6cm]{frametitle}
+        \textbf{\large\insertframetitle} \hfill \footnotesize\textcolor{accent}{\insertframesubtitle}\hspace*{0.6cm}
+    \end{beamercolorbox}
+}
+
+\begin{document}
+
+% ==============================================================================
+% SLIDE 1: DATASET CHOICE & EXPLORATORY DATA ANALYSIS (EDA)
+% ==============================================================================
+\begin{frame}[shrink=2]{1. Dataset Exploration \& Empirical Statistics}{Topic 1: Data Understanding, Stylometrics \& Distribution Shift}
+\begin{columns}[T]
+\begin{column}{0.53\textwidth}
+    \footnotesize
+    \textbf{Task \& Dataset Selection}:
+    \begin{itemize}\setlength\itemsep{1pt}
+        \item \textbf{Dataset}: \texttt{cardiffnlp/tweet\_eval} (Sentiment benchmark).
+        \item \textbf{Split}: 45,615 Train, 2,000 Val, 12,284 Test ($K=3$ classes).
+    \end{itemize}
+    \vspace{1pt}
+    \textbf{Critical Empirical Finding: Severe Prior Shift}:
+    \begin{itemize}\setlength\itemsep{1pt}
+        \item \textbf{Train}: 15.5\% Neg, 45.3\% Neu, 39.1\% Pos.
+        \item \textbf{Test}: \textbf{32.3\% Neg} ($\mathbf{\times 2.1}$), 48.3\% Neu, \textbf{19.3\% Pos} ($\mathbf{\times 0.5}$).
+        \item \emph{Integrity}: Tempered class weighting $w_c \propto (1/N_c)^{0.5}$ and validation-calibrated prior multipliers prevent negative over-prediction without test leakage.
+    \end{itemize}
+    \vspace{1pt}
+    \textbf{Polars Stylometric Insights}:
+    \begin{itemize}\setlength\itemsep{1pt}
+        \item Median length: 19 words; high lexical noise and Twitter slang.
+        \item \textbf{Negation cues}: $0.224$/tweet in Neg vs. $0.079$ in Pos ($\mathbf{3\times}$ higher). Particles (\emph{not, n't, never}) invert polarity.
+        \item \textbf{Exclamations}: $0.468$/tweet in Pos vs. $0.157$ in Neg ($\mathbf{3\times}$ higher).
+    \end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, height=0.33\textheight, keepaspectratio]{figures/label_distribution_shift.pdf}
+    \includegraphics[width=\linewidth, height=0.33\textheight, keepaspectratio]{figures/tweet_length_and_features.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==============================================================================
+% SLIDE 2: TEXT SEGMENTATION & TOKENIZATION STRATEGY
+% ==============================================================================
+\begin{frame}{2. Text Segmentation \& Tokenizer Design}{Topic 2: Byte-Level BPE, Subword Merges \& OOV Elimination}
+\begin{columns}[T]
+\begin{column}{0.53\textwidth}
+    \footnotesize
+    \textbf{Why Byte-Level BPE over Whitespace Tokenization?}
+    \begin{itemize}\setlength\itemsep{1.5pt}
+        \item \textbf{Heap's Law}: $V(N) = 17.14 \cdot N^{0.572}$. Whitespace tokenization yields $43,395$ raw types $\Rightarrow$ extreme sparsity and catastrophic test Out-Of-Vocabulary (OOV) rate.
+        \item \textbf{Expanded Corpus Training}: Trained BPE on 63,650 multi-domain tweets (Sentiment + Emotion + Irony + Offensive).
+    \end{itemize}
+    \vspace{2pt}
+    \textbf{Hyperparameter Sweep ($V \in \{2\text{k}, 4\text{k}, 8\text{k}, 16\text{k}\}$)}:
+    \begin{itemize}\setlength\itemsep{1.5pt}
+        \item Byte-level pre-tokenization maps any arbitrary byte $\Rightarrow$ \textbf{Strictly 0.00\% character UNK rate}.
+        \item \textbf{Optimal Size $\mathbf{V = 8,192}$}: Yields $27.8$ subwords/tweet (1.52 subwords/word). Preserves morphological negation affixes (\emph{un-, dis-, -less, n't}) critical for sentiment polarity.
+    \end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, height=0.40\textheight, keepaspectratio]{figures/tokenizer_tradeoff.pdf}
+    \vspace{2pt}
+    \includegraphics[width=\linewidth, height=0.40\textheight, keepaspectratio]{figures/heaps_law_vocab.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==============================================================================
+% SLIDE 3: REPRESENTATION SPACES (FEATURE ENGINEERING)
+% ==============================================================================
+\begin{frame}{3. Document Representation Spaces}{Topic 3: Indicator vs. BoW vs. Subword TF-IDF vs. Sequence IDs}
+\begin{columns}[T]
+\begin{column}{0.53\textwidth}
+    \footnotesize
+    \textbf{Five Representation Paradigms ($V = 8,192$)}:
+    \begin{enumerate}\setlength\itemsep{1.5pt}
+        \item \textbf{Token Indicator}: $x_i = \mathbb{I}(\text{token } i \in d) \in \{0, 1\}$.
+        Binary presence; invariant to term repetition.
+        \item \textbf{Bag-of-Words (BoW)}: $x_i = \text{count}(i, d) \in \mathbb{N}_0$.
+        Frequency counts of subword tokens.
+        \item \textbf{Subword TF-IDF}: L2-normalized with smoothed IDF.
+        \item \textbf{Subword N-Gram TF-IDF}: (1,2)-grams with sublinear scaling $1 + \log(\text{tf})$. Captures bigram collocations.
+        \item \textbf{Sequential Token IDs}: $x = [t_1, \dots, t_{64}] \in \mathbb{N}^{64}$.
+        Preserves word order, syntax, and negation scope.
+    \end{enumerate}
+    \vspace{1pt}
+    \textbf{Theoretical Note for Oral Defense}:
+    \begin{itemize}\setlength\itemsep{1pt}
+        \item Monroe et al. Log-Odds identify salient sentiment markers.
+        \item BoW destroys syntactic scope: \emph{"not happy, very bad"} yields identical BoW to \emph{"not bad, very happy"}.
+    \end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, height=0.48\textheight, keepaspectratio]{figures/representations_comparison.pdf}
+    \vspace{2pt}
+    \begin{block}{Information Spectrum Insight}
+        \scriptsize Singular value spectrum shows TF-IDF and N-gram spaces prevent high-frequency stopwords from dominating latent variance, enriching feature representation.
+    \end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==============================================================================
+% SLIDE 4: MODEL ARCHITECTURES & MODERN OPTIMIZATION
+% ==============================================================================
+\begin{frame}[shrink=2]{4. Model Architectures \& Modern Training}{Topic 4: Baselines vs. Deep MLP Ablation vs. Sequence Champions}
+\begin{columns}[T]
+\begin{column}{0.53\textwidth}
+    \footnotesize
+    \textbf{Model Architectures Tested}:
+    \begin{enumerate}\setlength\itemsep{1.2pt}
+        \item \textbf{Log-Linear Softmax}: $P(y|x) = \text{softmax}(W x + b)$ ($24.6\text{k}$ params).
+        \item \textbf{Shallow MLP}: $\text{ReLU}(W_1 x + b_1)$ with Dropout ($2.10\text{M}$ params).
+        \item \textbf{Deep Residual MLP}: 4 layers, LayerNorm, GELU, skip connections ($2.23\text{M}$ params). \emph{Ablation: fails on BoW!}
+        \item \textbf{BiLSTM + Attention}: In-domain PPMI-SVD subwords, Conv1D stem, BiLSTM, Tri-Pooling + R-Drop ($1.97\text{M}$ params).
+        \item \textbf{Transformer Scratch}: 2-layer Pre-LN Multi-Head Self-Attention + Positional Embeddings + Tri-Pooling ($1.38\text{M}$ params).
+    \end{enumerate}
+    \textbf{Self-Supervised In-Domain Initialization (Zero External Data)}:
+    \begin{itemize}\setlength\itemsep{1pt}
+        \item Shifted PPMI + Truncated SVD (Levy \& Goldberg, 2014) on 63.6k training tweets bootstraps subword semantic space.
+        \item R-Drop symmetric KL consistency regularizes attention heads.
+    \end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+    \begin{block}{Architectural Comparison Matrix}
+    \centering
+    \scriptsize
+    \begin{tabular}{l@{\hspace{6pt}}c@{\hspace{6pt}}c@{\hspace{6pt}}c@{\hspace{6pt}}r}
+        \toprule
+        \textbf{Model} & \textbf{Rep} & \textbf{Order} & \textbf{Pooling} & \textbf{Params} \\
+        \midrule
+        LogLin & BoW & No & None & 25k \\
+        S-MLP & BoW & No & None & 2.10M \\
+        BiLSTM & Seq & \textbf{Yes} & \textbf{Tri-Pool} & 1.97M \\
+        Transf & Seq & \textbf{Yes} & \textbf{Tri-Pool} & 1.38M \\
+        \bottomrule
+    \end{tabular}
+    \end{block}
+    \vspace{2pt}
+    \begin{alertblock}{Why Deep MLP Failed on BoW}
+        \scriptsize The Deep MLP failed (0.6122 Macro-F1 vs 0.6270 for Shallow MLP) because feedforward depth cannot recover lost word order; it merely amplifies co-adaptation on sparse bags of words.
+    \end{alertblock}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==============================================================================
+% SLIDE 5: EVALUATION METHODOLOGY & BAYESIAN ROPE
+% ==============================================================================
+\begin{frame}[shrink=2]{5. Evaluation Setup \& Bayesian ROPE Analysis}{Topic 5: Stratified Cross-Validation \& Posterior Probabilities}
+\begin{columns}[T]
+\begin{column}{0.53\textwidth}
+    \footnotesize
+    \textbf{Rigorous Evaluation Protocol}:
+    \begin{itemize}\setlength\itemsep{1.5pt}
+        \item \textbf{5-Fold Stratified CV} on Train ($N=45,615$). Zero test leakage.
+        \item \textbf{Primary Metric}: Macro-F1 (unweighted class average).
+        \item \textbf{Correlated Bayesian $t$-test} (Benavoli et al., 2017):
+        Corrects for fold dependency ($r = 1/(K-1) = 0.25$).
+        \item \textbf{ROPE}: $\mathbf{[-0.01, +0.01]}$ ($\pm 1\%$ Macro-F1 equivalence band).
+    \end{itemize}
+    \vspace{2pt}
+    \textbf{Decisive Bayesian Posterior Probabilities}:
+    \begin{itemize}\setlength\itemsep{1.5pt}
+        \item \textbf{BiLSTM vs. Log-Linear}: $\mathbf{P(\text{BiLSTM} > \text{LogLin}) = 99.96\%}$ (Mean Diff $\mathbf{+0.0275}$, 95\% HDI $[+0.022, +0.033]$).
+        \item \textbf{BiLSTM vs. Shallow MLP}: $\mathbf{P(\text{BiLSTM} > \text{S-MLP}) = 100.00\%}$ (Mean Diff $\mathbf{+0.0268}$, Effect Size $30.4$).
+        \item \textbf{BiLSTM vs. Deep MLP}: $\mathbf{P(\text{BiLSTM} > \text{Deep}) = 99.97\%}$ (Mean Diff $\mathbf{+0.0416}$).
+        \item \textbf{BoW vs. TF-IDF}: $\mathbf{P(\text{BoW} > \text{TF-IDF}) = 99.43\%}$.
+    \end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, height=0.40\textheight, keepaspectratio]{figures/bayesian_rope_bilstm_vs_loglin.pdf}
+    \vspace{2pt}
+    \includegraphics[width=\linewidth, height=0.40\textheight, keepaspectratio]{figures/bayesian_rope_bilstm_vs_shallow.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ==============================================================================
+% SLIDE 6: EMPIRICAL RESULTS, ERROR ANALYSIS & CONCLUSION
+% ==============================================================================
+\begin{frame}[shrink=2]{6. Results, Error Analysis \& Final Decision}{Topic 6: Cross-Validation vs. Official Test Benchmark}
+\begin{columns}[T]
+\begin{column}{0.53\textwidth}
+    \textbf{Performance Summary (CV \& Official Test Set $N=12,284$)}:
+    \centering
+    \scriptsize
+    \begin{tabular}{l@{\hspace{4pt}}c@{\hspace{6pt}}c@{\hspace{6pt}}c}
+        \toprule
+        \textbf{Model} & \textbf{Rep} & \textbf{Macro-F1 (CV)} & \textbf{Macro-F1 (Test)} \\
+        \midrule
+        \texttt{loglin\_bow}        & BoW & $0.6263 \pm 0.005$ & $0.5799$ ($58.9\%$ Acc) \\
+        \texttt{shallow\_mlp\_bow}  & BoW & $0.6270 \pm 0.005$ & $0.5862$ ($59.5\%$ Acc) \\
+        \texttt{deep\_mlp\_bow}     & BoW & $0.6122 \pm 0.006$ & -- (Ablation) \\
+        \texttt{transformer}       & Seq & $0.6288 \pm 0.005$ & $0.5899$ ($60.0\%$ Acc) \\
+        \rowcolor{teal!15}\textbf{\texttt{bilstm\_attn}} & \textbf{Seq} & $\mathbf{0.6538 \pm 0.005}$ & $\mathbf{0.6041}$ ($\mathbf{61.1\%}$ Acc) \\
+        \bottomrule
+    \end{tabular}
+    \vspace{2pt}
+    \flushleft\footnotesize
+    \textbf{Error Analysis \& Oral Defense Takeaways}:
+    \begin{itemize}\setlength\itemsep{0.5pt}
+        \item \textbf{1,195 Errors Corrected by BiLSTM}: Correctly resolved negation clauses and syntactic modifiers where BoW generated false alarms.
+        \item \textbf{Leak-Free Protocol}: 5-fold ensemble with internal fold validation checkpointing; official test evaluated strictly once with unbiased priors.
+        \item \textbf{Champion}: \textbf{BiLSTM + Attention} (Highest CV Macro-F1 $0.6538$, decisive Bayesian posterior $>99.9\%$, highest test generalization).
+    \end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, height=0.48\textheight, keepaspectratio]{figures/confusion_matrices.pdf}
+    \vspace{2pt}
+    \begin{block}{Final Model Decision for Oral Exam}
+        \scriptsize \textbf{BiLSTM + Attention} is our champion. Combining in-domain PPMI-SVD subwords, multi-pooling, and recurrent sequence modeling overcomes the orderless BoW limit with full statistical confidence.
+    \end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,30 @@
+{
+  "2048": {
+    "vocab_size": 2048,
+    "avg_tokens_per_tweet": 35.59956040377727,
+    "avg_words_per_tweet": 14.859492022142625,
+    "subword_expansion_ratio": 2.395745450162709,
+    "unk_rate": 0.010011319330901774
+  },
+  "4096": {
+    "vocab_size": 4096,
+    "avg_tokens_per_tweet": 31.23355584500163,
+    "avg_words_per_tweet": 14.859492022142625,
+    "subword_expansion_ratio": 2.1019262164856958,
+    "unk_rate": 0.011410758640821741
+  },
+  "8192": {
+    "vocab_size": 8192,
+    "avg_tokens_per_tweet": 27.802018886356237,
+    "avg_words_per_tweet": 14.859492022142625,
+    "subword_expansion_ratio": 1.8709938970274032,
+    "unk_rate": 0.012819161396111502
+  },
+  "16384": {
+    "vocab_size": 16384,
+    "avg_tokens_per_tweet": 25.236567893194398,
+    "avg_words_per_tweet": 14.859492022142625,
+    "subword_expansion_ratio": 1.6983466093987967,
+    "unk_rate": 0.014122307310181093
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "loglin": {
+    "display_name": "Log-Linear (BoW)",
+    "val_macro_f1": 0.6226206010980405,
+    "val_accuracy": 0.6475,
+    "test_accuracy": 0.5890589384565288,
+    "test_macro_f1": 0.5799191687149216,
+    "classification_report": {
+      "Negative": {
+        "precision": 0.5939662330473291,
+        "recall": 0.540281973816717,
+        "f1-score": 0.5658536585365853,
+        "support": 3972.0
+      },
+      "Neutral": {
+        "precision": 0.6292505204718946,
+        "recall": 0.6109146033350177,
+        "f1-score": 0.6199470130758055,
+        "support": 5937.0
+      },
+      "Positive": {
+        "precision": 0.5032679738562091,
+        "recall": 0.616,
+        "f1-score": 0.5539568345323741,
+        "support": 2375.0
+      },
+      "accuracy": 0.5890589384565288,
+      "macro avg": {
+        "precision": 0.5754949091251443,
+        "recall": 0.5890655257172449,
+        "f1-score": 0.5799191687149216,
+        "support": 12284.0
+      },
+      "weighted avg": {
+        "precision": 0.5934838534365131,
+        "recall": 0.5890589384565288,
+        "f1-score": 0.5896974625816316,
+        "support": 12284.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        54.0281973816717,
+        35.97683786505539,
+        9.99496475327291
+      ],
+      [
+        21.273370389085397,
+        61.09146033350177,
+        17.635169277412835
+      ],
+      [
+        8.589473684210526,
+        29.810526315789478,
+        61.6
+      ]
+    ]
+  },
+  "shallow_mlp": {
+    "display_name": "Shallow MLP (BoW)",
+    "val_macro_f1": 0.6384806381340177,
+    "val_accuracy": 0.6585,
+    "test_accuracy": 0.5945945945945946,
+    "test_macro_f1": 0.5862307906547669,
+    "classification_report": {
+      "Negative": {
+        "precision": 0.5800989841104455,
+        "recall": 0.56067472306143,
+        "f1-score": 0.5702214825246448,
+        "support": 3972.0
+      },
+      "Neutral": {
+        "precision": 0.6347795783237498,
+        "recall": 0.6136095671214418,
+        "f1-score": 0.6240150736553615,
+        "support": 5937.0
+      },
+      "Positive": {
+        "precision": 0.5299334811529933,
+        "recall": 0.6037894736842105,
+        "f1-score": 0.5644558157842944,
+        "support": 2375.0
+      },
+      "accuracy": 0.5945945945945946,
+      "macro avg": {
+        "precision": 0.5816040145290629,
+        "recall": 0.5926912546223607,
+        "f1-score": 0.5862307906547669,
+        "support": 12284.0
+      },
+      "weighted avg": {
+        "precision": 0.5968277058884037,
+        "recall": 0.5945945945945946,
+        "f1-score": 0.5951058110849454,
+        "support": 12284.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        56.067472306142996,
+        34.541792547834845,
+        9.390735146022156
+      ],
+      [
+        23.496715512885295,
+        61.36095671214418,
+        15.142327774970523
+      ],
+      [
+        9.136842105263158,
+        30.484210526315792,
+        60.37894736842105
+      ]
+    ]
+  },
+  "transformer_scratch": {
+    "display_name": "Transformer Scratch",
+    "val_macro_f1": 0.6357149904928373,
+    "val_accuracy": 0.6585,
+    "test_accuracy": 0.5998046239010094,
+    "test_macro_f1": 0.5898559448792805,
+    "classification_report": {
+      "Negative": {
+        "precision": 0.6065716778133178,
+        "recall": 0.5251762336354482,
+        "f1-score": 0.5629469707192012,
+        "support": 3972.0
+      },
+      "Neutral": {
+        "precision": 0.6338642078792959,
+        "recall": 0.6368536297793499,
+        "f1-score": 0.6353554024533692,
+        "support": 5937.0
+      },
+      "Positive": {
+        "precision": 0.5211805555555555,
+        "recall": 0.632,
+        "f1-score": 0.5712654614652711,
+        "support": 2375.0
+      },
+      "accuracy": 0.5998046239010094,
+      "macro avg": {
+        "precision": 0.5872054804160564,
+        "recall": 0.5980099544715993,
+        "f1-score": 0.5898559448792805,
+        "support": 12284.0
+      },
+      "weighted avg": {
+        "precision": 0.6032528757650865,
+        "recall": 0.5998046239010094,
+        "f1-score": 0.5995511122632968,
+        "support": 12284.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        52.51762336354482,
+        37.03423967774421,
+        10.448136958710977
+      ],
+      [
+        20.077480208859694,
+        63.685362977934986,
+        16.237156813205324
+      ],
+      [
+        6.778947368421052,
+        30.021052631578947,
+        63.2
+      ]
+    ]
+  },
+  "bilstm_attention": {
+    "display_name": "BiLSTM + Attention",
+    "val_macro_f1": 0.6785531704081919,
+    "val_accuracy": 0.699,
+    "test_accuracy": 0.61055030934549,
+    "test_macro_f1": 0.6040503466235941,
+    "classification_report": {
+      "Negative": {
+        "precision": 0.6233911583659765,
+        "recall": 0.5609264853977844,
+        "f1-score": 0.5905115292870395,
+        "support": 3972.0
+      },
+      "Neutral": {
+        "precision": 0.6542239685658153,
+        "recall": 0.616978271854472,
+        "f1-score": 0.6350554785020804,
+        "support": 5937.0
+      },
+      "Positive": {
+        "precision": 0.5171970427515269,
+        "recall": 0.6774736842105263,
+        "f1-score": 0.5865840320816624,
+        "support": 2375.0
+      },
+      "accuracy": 0.61055030934549,
+      "macro avg": {
+        "precision": 0.5982707232277729,
+        "recall": 0.6184594804875942,
+        "f1-score": 0.6040503466235941,
+        "support": 12284.0
+      },
+      "weighted avg": {
+        "precision": 0.6177613447525058,
+        "recall": 0.61055030934549,
+        "f1-score": 0.611280791793302,
+        "support": 12284.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        56.092648539778445,
+        32.82980866062437,
+        11.07754279959718
+      ],
+      [
+        20.414350682162706,
+        61.697827185447196,
+        17.887822132390095
+      ],
+      [
+        5.6421052631578945,
+        26.610526315789475,
+        67.74736842105263
+      ]
+    ]
+  },
+  "error_examples": [
+    {
+      "index": 10,
+      "text": "An interesting security vulnerability - albeit not for the everyday car thief",
+      "true_label": "Neutral",
+      "bilstm_pred": "Neutral",
+      "bow_pred": "Positive",
+      "type": "Recovered by BiLSTM (Order/Negation)"
+    },
+    {
+      "index": 12,
+      "text": "#onedirection #harrystyles cute little dance \ud83d\ude09",
+      "true_label": "Positive",
+      "bilstm_pred": "Positive",
+      "bow_pred": "Neutral",
+      "type": "Recovered by BiLSTM (Order/Negation)"
+    },
+    {
+      "index": 17,
+      "text": "ISIS and The CIA What You Need To Know! #ISIS #falseflag #saudi #CIA #mossad #israel",
+      "true_label": "Neutral",
+      "bilstm_pred": "Neutral",
+      "bow_pred": "Negative",
+      "type": "Recovered by BiLSTM (Order/Negation)"
+    },
+    {
+      "index": 19,
+      "text": "@user #GilmoreGirlsTop4 Lorelai, Rory, Lane, Sookie @user @user",
+      "true_label": "Neutral",
+      "bilstm_pred": "Neutral",
+      "bow_pred": "Positive",
+      "type": "Recovered by BiLSTM (Order/Negation)"
+    },
+    {
+      "index": 20,
+      "text": "Christians In Palestine: Yes, They Exist #gaza #palestine #israel #BDS",
+      "true_label": "Neutral",
+      "bilstm_pred": "Neutral",
+      "bow_pred": "Negative",
+      "type": "Recovered by BiLSTM (Order/Negation)"
+    },
+    {
+      "index": 0,
+      "text": "@user @user what do these '1/2 naked pics' have to do with anything? They're not even like that.",
+      "true_label": "Neutral",
+      "bilstm_pred": "Negative",
+      "bow_pred": "Negative",
+      "type": "Both Failed"
+    },
+    {
+      "index": 3,
+      "text": "I think I may be finally in with the in crowd #mannequinchallenge  #grads2014 @user",
+      "true_label": "Positive",
+      "bilstm_pred": "Neutral",
+      "bow_pred": "Neutral",
+      "type": "Both Failed"
+    },
+    {
+      "index": 4,
+      "text": "@user Wow,first Hugo Chavez and now Fidel Castro. Danny Glover, Michael Moore, Oliver Stone, and Sean Penn are running out of heroes.",
+      "true_label": "Negative",
+      "bilstm_pred": "Positive",
+      "bow_pred": "Neutral",
+      "type": "Both Failed"
+    },
+    {
+      "index": 5,
+      "text": "Savchenko now Saakashvili took drug test live on Ukraine TV. To prove they are not drug-fueled loonies?",
+      "true_label": "Neutral",
+      "bilstm_pred": "Negative",
+      "bow_pred": "Negative",
+      "type": "Both Failed"
+    },
+    {
+      "index": 13,
+      "text": "When Ryan privatizes SS, Medicare, Medicaid, & does away with ACA, what will Trump's base feel about \"change\" then? That's a big one right?!",
+      "true_label": "Negative",
+      "bilstm_pred": "Neutral",
+      "bow_pred": "Neutral",
+      "type": "Both Failed"
+    }
+  ],
+  "num_recovered_by_bilstm": 1195,
+  "num_both_failed": 3785
+}
